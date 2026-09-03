@@ -11,7 +11,8 @@ export function GroupCard({ grupo }: { grupo: GrupoUnidade }) {
       href={grupo.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-card text-navy focus-visible:ring-accent focus-visible:ring-offset-navy flex w-[153px] h-[70px] items-center gap-3 rounded-2xl pr-2 pl-3 shadow-[0_6px_18px_rgba(16,24,56,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(16,24,56,0.38)] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+      aria-label={`${grupo.nome} — entrar no grupo do WhatsApp`}
+      className="bg-card text-navy focus-visible:ring-accent focus-visible:ring-offset-navy flex h-[70px] w-[153px] items-center gap-3 rounded-2xl pr-2 pl-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition hover:scale-105 duration-300 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
     >
       <svg
         viewBox="0 0 10 12"
@@ -28,8 +29,6 @@ export function GroupCard({ grupo }: { grupo: GrupoUnidade }) {
           </span>
         ))}
       </span>
-
-      <span className="sr-only">— entrar no grupo do WhatsApp</span>
     </a>
   );
 }

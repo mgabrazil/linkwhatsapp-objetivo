@@ -13,27 +13,27 @@ export function GroupsPanel({ grupos }: { grupos: GrupoUnidade[] }) {
     <div className="relative">
       <div
         aria-hidden="true"
-        className="bg-navy w-[276px] absolute inset-y-[2.8%] right-[10.5%] rounded-3xl"
+        className="bg-navy absolute inset-y-[2.8%] right-[10.5%] w-[276px] rounded-3xl"
       />
 
-      <p className="absolute top-[7.5%] right-[18%] left-[50%] text-right text-[18px] leading-snug font-semibold text-white/90 sm:text-xs">
+      <p className="absolute top-[7.5%] right-[18%] left-[50%] text-right text-[18px] leading-snug font-semibold text-white/90 sm:text-[20px]">
         Receba oportunidades exclusivas
       </p>
 
       <Image
-        src="/images/Flor.png"
+        src="/images/florU.png"
         alt=""
         width={165}
         height={165}
-        className="absolute top-[37%] left-[78%] h-auto w-[52.88px]"
+        className="absolute top-[37%] left-[81%] lg:left-[82%] h-auto w-[60px]"
       />
 
       <Image
-        src="/images/Estrela.png"
+        src="/images/estrela.png"
         alt=""
         width={203}
         height={203}
-        className="absolute top-[98%] left-[75%] h-auto w-[58px] -translate-x-1/2 -translate-y-1/2"
+        className="absolute top-[97%] left-[75%] h-auto w-[70px] -translate-x-1/2 -translate-y-1/2"
       />
 
       {/*
