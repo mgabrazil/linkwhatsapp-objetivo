@@ -1,62 +1,66 @@
 # Link WhatsApp — Unidades
 
-Landing page que leva o visitante direto ao WhatsApp da unidade certa.
-Uma página só, sem backend: os links `wa.me` já saem prontos no HTML,
-com a mensagem pré-digitada.
+Landing page de uma tela só que leva o visitante direto ao grupo de WhatsApp
+da unidade certa. Sem backend: os links de convite já saem prontos no HTML.
 
-Stack: **Next.js 16** (App Router) · **TypeScript** · **Tailwind CSS v4** · fonte **Plus Jakarta Sans**.
+Stack: **Next.js 16** (App Router · Turbopack) · **TypeScript** · **Tailwind CSS v4** · fonte **Plus Jakarta Sans**.
 
 ## Como rodar
 
 ```bash
 npm install
-cp .env.example .env.local
 npm run dev
 ```
 
-Abre em http://localhost:3000.
+Abre em http://localhost:3000. Não precisa de `.env` para desenvolver —
+`NEXT_PUBLIC_APP_URL` cai em `http://localhost:3000` sozinha.
 
 ## Como adicionar ou editar uma unidade
 
-Tudo vive em [`src/data/unidades.ts`](src/data/unidades.ts). Acrescente um objeto:
+Tudo vive em [`src/data/grupos.ts`](src/data/grupos.ts). Cada unidade é um objeto:
 
 ```ts
 {
-  id: "maringa-matriz",             // único; vira a âncora #maringa-matriz
-  nome: "Matriz Maringá",
-  empresa: "MGA Holding",           // opcional, aparece como etiqueta
-  cidade: "Maringá",
-  uf: "PR",                         // alimenta o filtro por estado
-  endereco: "Av. Brasil, 1000 — Zona 01, Maringá/PR",
-  whatsapp: "5544999990001",        // só dígitos, com DDI (55)
-  telefone: "554430000001",         // opcional
-  horario: "Seg a sex, 8h às 18h",
-  mapsUrl: "https://maps.google.com/?q=...",  // opcional
-  mensagem: "Olá! Quero um orçamento.",       // opcional
-  destaque: true,                             // opcional: sobe para o topo
+  id: "asa-norte",                                  // único, usado como key da lista
+  nome: "Asa Norte",                                // o que aparece no cartão
+  link: "https://chat.whatsapp.com/AbCdEf123456",   // convite do grupo
 }
 ```
 
-Nada além disso muda: a contagem do topo, a busca, o filtro por estado e a
-grade de cartões se ajustam sozinhos.
+A lista da página segue **a ordem do array** — para reordenar, mova o objeto.
+Incluir ou remover não exige mexer em mais nada.
 
-- **Sem `mapsUrl` e sem `telefone`**, os botões secundários somem.
-- **Sem `mensagem`**, usa a padrão de `siteConfig`, que já insere o nome da unidade.
-- **`destaque: true`** coloca a unidade antes das outras; o resto sai em ordem
-  alfabética de cidade.
+- **Onde achar o `link`:** no WhatsApp, abra o grupo → _Dados do grupo_ →
+  _Convidar via link_ → _Copiar link_.
+- **O `nome` quebra por palavra:** cada palavra vira uma linha dentro do cartão
+  ("Taguatinga QI" ocupa duas). Nomes de três palavras ou mais estouram a altura
+  fixa do cartão — prefira nomes curtos.
 
-> Os dados de hoje são **exemplo**, só para a página renderizar completa.
-> Troque por reais antes de publicar — inclusive os números de `src/config/site.ts`.
+> ⚠️ Os links de hoje são **placeholder** (`TROQUE-...`) e não abrem grupo nenhum.
+> Troque todos antes de publicar.
 
 ## Ajustes rápidos
 
-| O que mudar                     | Onde                                                                            |
-| ------------------------------- | ------------------------------------------------------------------------------- |
-| Nome, descrição e canais gerais | [`src/config/site.ts`](src/config/site.ts)                                      |
-| Mensagem padrão do WhatsApp     | `mensagemPadrao` em [`src/config/site.ts`](src/config/site.ts)                  |
-| Cor da marca                    | `--brand` em [`src/app/globals.css`](src/app/globals.css)                       |
-| Logos do topo                   | `BrandBar` em [`src/components/brand-bar.tsx`](src/components/brand-bar.tsx)    |
-| Textos das seções               | [`src/app/page.tsx`](src/app/page.tsx)                                          |
+| O que mudar              | Onde                                                                   |
+| ------------------------ | ---------------------------------------------------------------------- |
+| Unidades e links         | [`src/data/grupos.ts`](src/data/grupos.ts)                             |
+| Título da página         | [`src/app/page.tsx`](src/app/page.tsx)                                 |
+| Nome, descrição e OG     | [`src/config/site.ts`](src/config/site.ts)                             |
+| Cores                    | Tokens no `:root` de [`src/app/globals.css`](src/app/globals.css)      |
+| Logos do topo            | [`src/components/logotop.tsx`](src/components/logotop.tsx)             |
+| Banner                   | [`src/components/banner.tsx`](src/components/banner.tsx)               |
+| Painel, texto e enfeites | [`src/components/containermain.tsx`](src/components/containermain.tsx) |
+| Aparência do cartão      | [`src/components/group-card.tsx`](src/components/group-card.tsx)       |
+
+As imagens ficam em [`public/images/`](public/images): `Banner.png`, os dois
+logos, e `florU.png` / `estrela.png` (os enfeites do painel).
+
+### Sobre o layout do painel
+
+O `ContainerMain` posiciona a faixa azul, o texto e os enfeites em
+**porcentagem** sobre a coluna, e a lista de cartões tem largura e espaçamento
+fixos em `%`. É um layout ajustado à mão: ao mudar a quantidade de unidades,
+confira no navegador se os enfeites e a faixa continuam no lugar.
 
 ## Deploy
 
@@ -86,31 +90,31 @@ espera, e desliga a otimização de imagem — que exige servidor.
 ```
 src/
 ├── app/
-│   ├── page.tsx            # A landing: hero, como funciona, unidades, CTA
+│   ├── page.tsx            # A landing inteira
 │   ├── layout.tsx          # Fonte, metadata e OG
-│   ├── globals.css         # Tokens de tema (marca em --brand)
+│   ├── globals.css         # Tokens de cor e tipografia
 │   ├── error.tsx           # Error boundary
 │   └── not-found.tsx       # 404
 ├── components/
-│   ├── brand-bar.tsx       # As duas marcas no topo da página
-│   ├── hero-banner.tsx     # Banner de destaque
-│   ├── sparkle.tsx         # Brilho decorativo do banner
-│   ├── groups-panel.tsx    # Lista dos grupos (client)
-│   └── group-card.tsx      # Cartão de um grupo
-├── config/site.ts          # ← nome, descrição e canais gerais
-├── data/unidades.ts        # ← as unidades
-├── lib/
-│   ├── env.ts
-│   ├── unidades.ts         # Ordenação, estados e filtro
-│   ├── whatsapp.ts         # Monta wa.me e formata telefone
-│   └── utils.ts            # cn()
-└── types/index.ts
+│   ├── logotop.tsx         # Os dois logos no topo
+│   ├── banner.tsx          # Imagem de destaque
+│   ├── containermain.tsx   # Painel azul, enfeites e a lista de grupos
+│   └── group-card.tsx      # Cartão de uma unidade (link do convite)
+├── config/site.ts          # ← nome, descrição e URL usados no metadata
+├── data/grupos.ts          # ← as unidades e seus links
+├── lib/env.ts              # Lê e valida as variáveis de ambiente
+└── types/index.ts          # GrupoUnidade
 ```
+
+Sobraram de uma versão anterior, sem nenhum importador:
+`src/data/unidades.ts`, `src/lib/unidades.ts`, `src/lib/whatsapp.ts`,
+`src/lib/utils.ts`, o tipo `Unidade` e o bloco `contato` de `src/config/site.ts`.
+Podem ser apagados.
 
 ## Variáveis de ambiente
 
 | Nome                  | Obrigatória | Descrição                                                         |
 | --------------------- | ----------- | ----------------------------------------------------------------- |
-| `NEXT_PUBLIC_APP_URL` | Sim         | URL pública, usada no metadata e nos previews de compartilhamento |
+| `NEXT_PUBLIC_APP_URL` | Em produção | URL pública, usada no metadata e nos previews de compartilhamento |
 
-Em desenvolvimento, sem `.env.local`, ela cai em `http://localhost:3000`.
+Sem `.env.local`, ela cai em `http://localhost:3000`.
