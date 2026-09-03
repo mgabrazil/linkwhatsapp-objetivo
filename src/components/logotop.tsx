@@ -1,7 +1,7 @@
 import Image from "next/image";
 export function LogosTop() {
   return (
-    <div className="flex items-center justify-center gap-24 sm:gap-32 lg:gap-46">
+    <div className="flex items-center justify-center gap-16 sm:gap-32 lg:gap-46">
       <Image
         src="/images/Logo_Unipaper.png"
         alt="Unipaper"
