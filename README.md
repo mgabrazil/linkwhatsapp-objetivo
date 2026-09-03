@@ -12,8 +12,8 @@ npm install
 npm run dev
 ```
 
-Abre em http://localhost:3000. Não precisa de `.env` para desenvolver —
-`NEXT_PUBLIC_APP_URL` cai em `http://localhost:3000` sozinha.
+Abre em http://localhost:3000. Não precisa de `.env`: o projeto não lê
+nenhuma variável de ambiente.
 
 ## Como adicionar ou editar uma unidade
 
@@ -100,21 +100,28 @@ src/
 │   ├── banner.tsx          # Imagem de destaque
 │   ├── containermain.tsx   # Painel azul, enfeites e a lista de grupos
 │   └── group-card.tsx      # Cartão de uma unidade (link do convite)
-├── config/site.ts          # ← nome, descrição e URL usados no metadata
+├── config/site.ts          # ← nome, descrição e locale do metadata
 ├── data/grupos.ts          # ← as unidades e seus links
-├── lib/env.ts              # Lê e valida as variáveis de ambiente
 └── types/index.ts          # GrupoUnidade
 ```
 
-Sobraram de uma versão anterior, sem nenhum importador:
-`src/data/unidades.ts`, `src/lib/unidades.ts`, `src/lib/whatsapp.ts`,
-`src/lib/utils.ts`, o tipo `Unidade` e o bloco `contato` de `src/config/site.ts`.
-Podem ser apagados.
+## Metadata e link preview
 
-## Variáveis de ambiente
+O `<title>`, a descrição e as tags Open Graph saem de
+[`src/config/site.ts`](src/config/site.ts), montadas em
+[`src/app/layout.tsx`](src/app/layout.tsx).
 
-| Nome                  | Obrigatória | Descrição                                                         |
-| --------------------- | ----------- | ----------------------------------------------------------------- |
-| `NEXT_PUBLIC_APP_URL` | Em produção | URL pública, usada no metadata e nos previews de compartilhamento |
+Hoje não há `og:image`, então o WhatsApp mostra o preview só com texto. Para
+ter imagem, acrescente ao `metadata` do layout um `metadataBase` com o domínio
+real e a imagem:
 
-Sem `.env.local`, ela cai em `http://localhost:3000`.
+```ts
+metadataBase: new URL("https://seu-dominio.com.br"),
+openGraph: {
+  // ...
+  images: ["/images/og.png"],
+},
+```
+
+O `metadataBase` só é necessário nesse caso — ele existe para resolver caminhos
+relativos como o `/images/og.png` acima.
