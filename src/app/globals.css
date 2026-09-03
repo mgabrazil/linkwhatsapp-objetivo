@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta da landing. Trocar aqui muda a página inteira. */
+  --background: #779dff;
+  --foreground: #1e2d5f;
+  --card: #ffffff;
+  --brand: #779dff;
+  --brand-ink: #1e2d5f;
+  /* Azul escuro do arco da foto e do painel dos grupos. */
+  --navy: #1e2d5f;
+  --navy-deep: #16204a;
+  /* Amarelo das estrelinhas, o mesmo do "U" da Unipaper. */
+  --accent: #ffc800;
+  /* Tokens do tema anterior, ainda usados pelos componentes de unidade. */
+  --muted: #6c6c78;
+  --border: #e5e2da;
+  --whatsapp: #25d366;
+  --whatsapp-dark: #128c4a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-dark: var(--whatsapp-dark);
+  --font-sans: var(--font-jakarta);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
