@@ -55,7 +55,7 @@ grade de cartões se ajustam sozinhos.
 | Nome, descrição e canais gerais | [`src/config/site.ts`](src/config/site.ts)                                      |
 | Mensagem padrão do WhatsApp     | `mensagemPadrao` em [`src/config/site.ts`](src/config/site.ts)                  |
 | Cor da marca                    | `--brand` em [`src/app/globals.css`](src/app/globals.css)                       |
-| Logo                            | `BrandMark` em [`src/components/brand-mark.tsx`](src/components/brand-mark.tsx) |
+| Logos do topo                   | `BrandBar` em [`src/components/brand-bar.tsx`](src/components/brand-bar.tsx)    |
 | Textos das seções               | [`src/app/page.tsx`](src/app/page.tsx)                                          |
 
 ## Deploy
@@ -92,13 +92,11 @@ src/
 │   ├── error.tsx           # Error boundary
 │   └── not-found.tsx       # 404
 ├── components/
-│   ├── brand-mark.tsx      # Monograma + nome do grupo
-│   ├── floating-whatsapp.tsx # Botão fixo do atendimento central
-│   ├── site-header.tsx     # Header fixo com navegação
-│   ├── site-footer.tsx     # Rodapé com os outros canais
-│   ├── unit-card.tsx       # Cartão de uma unidade
-│   ├── unit-directory.tsx  # Busca + filtro por estado (client)
-│   └── whatsapp-icon.tsx   # Glifo do WhatsApp
+│   ├── brand-bar.tsx       # As duas marcas no topo da página
+│   ├── hero-banner.tsx     # Banner de destaque
+│   ├── sparkle.tsx         # Brilho decorativo do banner
+│   ├── groups-panel.tsx    # Lista dos grupos (client)
+│   └── group-card.tsx      # Cartão de um grupo
 ├── config/site.ts          # ← nome, descrição e canais gerais
 ├── data/unidades.ts        # ← as unidades
 ├── lib/

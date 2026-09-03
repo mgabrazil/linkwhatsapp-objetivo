@@ -1,10 +1,4 @@
 import type { GrupoUnidade } from "@/types";
-
-/**
- * Cartão de uma unidade, na proporção 153x111 do design.
- * Cada palavra do nome fica em uma linha, como no modelo.
- * Abre o convite do grupo em uma nova aba.
- */
 export function GroupCard({ grupo }: { grupo: GrupoUnidade }) {
   return (
     <a

@@ -1,7 +1,5 @@
 import Image from "next/image";
-
-/** As duas marcas no topo da página, lado a lado. */
-export function BrandBar() {
+export function LogosTop() {
   return (
     <div className="flex items-center justify-center gap-28 sm:gap-32 lg:gap-46">
       <Image
