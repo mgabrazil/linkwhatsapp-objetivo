@@ -3,7 +3,7 @@ export function Banner() {
   return (
     <div className="relative">
       <Image
-        src="/images/Objetivo-Slogan.png"
+        src="/images/Slogan-Objetivo.png"
         alt="Novidades Objetivo"
         width={1433}
         height={1098}
