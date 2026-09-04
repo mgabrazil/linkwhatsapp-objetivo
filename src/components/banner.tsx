@@ -3,10 +3,10 @@ export function Banner() {
   return (
     <div className="relative">
       <Image
-        src="/images/Banner.png"
+        src="/images/Objetivo-Slogan.png"
         alt="Novidades Objetivo"
-        width={425}
-        height={336}
+        width={1433}
+        height={1098}
         priority
         className="h-auto w-full"
       />
