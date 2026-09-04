@@ -16,7 +16,7 @@ export function GroupCard({ grupo }: { grupo: GrupoUnidade }) {
         <path d="M0 0l10 6-10 6z" />
       </svg>
 
-      <span className="text-[18px] leading-tight font-bold">
+      <span className="text-[18px] leading-tight font-bold text-black">
         {grupo.nome.split(" ").map((palavra, i) => (
           <span key={i} className="block">
             {palavra}
